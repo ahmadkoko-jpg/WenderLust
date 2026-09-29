@@ -101,9 +101,10 @@ app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong!" } = err;
     res.status(statusCode).render("err.ejs", { err });
 });
-
-app.listen(port, () => {
-    console.log(`App is listening on port ${port}`);
-});
-
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 module.exports = app.js
