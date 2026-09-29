@@ -19,7 +19,6 @@ const Listing = require('./models/listing.js')
 const listing = require('./router/listing');
 const reviews = require('./router/review.js');
 const userRouter = require('./router/user.js');
-const  ATLASDB_URL='mongodb://zaheerabbas12hk_db_user:UPxGc2xaPyxOkco9@ac-8dnemyi-shard-00-00.b7uwbpu.mongodb.net:27017,ac-8dnemyi-shard-00-01.b7uwbpu.mongodb.net:27017,ac-8dnemyi-shard-00-02.b7uwbpu.mongodb.net:27017/?ssl=true&replicaSet=atlas-s3fe1t-shard-0&authSource=admin&appName=Cluster0'
 
 const port = 8080;
 
@@ -29,7 +28,7 @@ main()
     .catch((err) => console.log(err));
 
 async function main() {
-    await mongoose.connect(ATLASDB_URL);
+    await mongoose.connect(process.env.ATLASDB_URL);
 }
 
 // EJS & App Configurations
@@ -46,7 +45,7 @@ app.use(cookieParser("Secret Code"));
 const { MongoStore } = require("connect-mongo");
 
 const store = new MongoStore({
-    mongoUrl:ATLASDB_URL,
+    mongoUrl:process.env.ATLASDB_URL,
     crypto:{
         secret:"mysecretCode"
     },
