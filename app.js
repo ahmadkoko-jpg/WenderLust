@@ -91,16 +91,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
-const initDB = async () => {
-    await Listing.deleteMany({});
-  initData.data =   initData.data.map((e) => ({...e,owner:"6aa77a7bc23400a77c0bd368"}))
-    await Listing.insertMany(initData.data)
-    console.log("Database was initialized")
-}
-
-initDB();
-
 // Routes
 app.use('/listings', listing);
 app.use('/listings/:id/reviews', reviews);
