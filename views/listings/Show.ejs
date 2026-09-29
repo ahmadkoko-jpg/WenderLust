@@ -1,0 +1,94 @@
+<% layout("layouts/boilerplate") %>
+<script>
+    const mapToken = "<%= process.env.MAP_TOKEN %>";
+    // Quotes ("") hata diye hain taake JavaScript isey direct Array samjhe
+    const listing = <%- JSON.stringify(listing) %>;
+</script>
+     <div class="row">
+        <div class="col-8 offset-2">
+                 <b><%= listing.title  %></b>
+    </div>
+      <div class="col-6 offset-2">
+    <div class="card listing-card" style="border: none;">
+        <img src="<%= listing.image.url  %>" class="card-img-top showimage" alt="listings images">
+        <div class="card-body">
+            <p class="card-text">
+    
+            <p style="font-weight: 600;">
+  <%= listing.owner && listing.owner.username ? `Owned By: ${listing.owner.username}` : "" %>
+</p>
+                <p style="font-weight: 600;"><%= listing.description %></p>
+                <p style="font-weight: 600;"><%= listing.price  %></p>
+                <p style="font-weight: 600;"><%= listing.location %></p>
+                <p style="font-weight: 600;"><%= listing.country %></p>
+            </p>
+        </div>
+    </div>
+    </div>
+            </div>
+             <% if (listing.owner && listing.owner.username) { %>
+    <div class="col1">
+       <form action="/listings/<%= listing._id %>/Edit" method="get">
+                <button class="btn btn-outline-dark col-1 offset-2">Edit</button>
+            </form>
+  <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
+    <button style="font-weight: 600; margin-top: 20px;" class="btn btn-outline-danger col-1 offset-2">Delete</button>
+  </form>
+<% } %>
+                </div>
+                <div class="col-8 offset-2 mt-4">
+                    <h3 style="font:bolder;">Leave a review</h3>
+                    <form method="POST" action="/listings/<%= listing._id %>/reviews">
+                        <hr>
+                        <!-- <div class="mb-3 mt-3">
+                            <label for="rating" class="form-label">Rating</label>
+                            <input class="form-range" type="range" min="1" max="5" required id="rating" name="review[rating]">
+                        </div> -->
+<fieldset class="starability-heartbeat">
+  <legend>First rating:</legend>
+  <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+  <input type="radio" id="second-rate1" name="review[rating]" value="1" />
+  <label for="second-rate1" title="Terrible">1 star</label>
+  <input type="radio" id="second-rate2" name="review[rating]" value="2" />
+  <label for="second-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="second-rate3" name="review[rating]" value="3" />
+  <label for="second-rate3" title="Average">3 stars</label>
+  <input type="radio" id="second-rate4" name="review[rating]" value="4" />
+  <label for="second-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="second-rate5" name="review[rating]" value="5" />
+  <label for="second-rate5" title="Amazing">5 stars</label>
+</fieldset>
+                        <div class="mb-3 mt-3">
+                            <label for="comment" class="form-label">comments</label>
+                            <textarea  class="form-control" name="review[comment]" required id="comment" cols="30" rows="10"></textarea>
+                        </div>
+                        <button class="btn btn-outline-dark mb-3">Submit</button>
+                    </form>
+                <div>
+                    <p><b>All Reviews</b> </p>
+                 <div class="row">
+                      <% for(val of listing.reviews) { %>        
+                    <div class="card col-5 mb-4 ms-4"> 
+                        <div class="card-body mt-2">
+                              <h6 class="card-title"><%= val.owner && val.owner.username ? `Author : ${val.owner.username}` : "" %></h6>
+                            <p class="card-text"><%= val.comment  %></p>
+                             <p class="starability-result" data-rating="<%= val.rating  %>"></p>
+                            <form method="post" action="/listings/<%= listing._id %>/reviews/<%= val._id %>?_method=DELETE">
+                                <button class="btn btn-outline-danger mb-3" >Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                   <% } %>
+               
+          
+<div class="col-8 mb-3 ">
+      <h2>Where you"ll be</h2>
+      <div id="map"></div>
+    </div>
+    <script src="/js/map.js"></script>
+  </div>
+                </div>
+                      </div>
+                        </div>
+</body>
+ 

@@ -1,0 +1,32 @@
+<!-- Success Alert with Remove/Close Button -->
+ <% if (Succes && Succes.length > 0) { %>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Mubarak ho!</strong> <%= Succes  %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+
+<!-- alert for Deleting -->
+ <% if (Deleted && Deleted.length > 0) { %>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Mubarak ho!</strong> <%= Deleted  %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+
+<!-- alert for Non Existings list -->
+  <% if (error && error.length > 0) { %>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Information!</strong> <%= error  %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+
+ <% if (Succeses && Succeses.length > 0) { %>
+<div class="alert alert-succes alert-dismissible fade show" role="alert">
+  <strong>Information!</strong> <%= Succeses  %>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<% } %>
+
+

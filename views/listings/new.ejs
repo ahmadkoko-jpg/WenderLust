@@ -1,0 +1,72 @@
+<% layout("layouts/boilerplate") %>
+<body>
+  <h2 class="offset-2">Create new listing from here. </h2>
+  <div class="col-8 offset-2">
+  <form action="/listings" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+    <div>
+      <label for="title" class="form-label">Title</label>
+    <input type="text" name="listings[title]" required class="form-control" placeholder="Enter title">
+      <div class="valid-feedback">Title looks Good</div>
+         <div class="invalid-feedback">Title Should be valid/not empty</div>
+  </div> <br>
+  <div>
+         <label for="description" class="form-label">Description</label>
+           <textarea placeholder="Enter your message" name="listings[description]" class="form-control"></textarea>
+  <div class="valid-feedback">Description look's Good</div>
+          </div><br>
+     
+        <div>
+           <label for="image" class="form-label">Upload Image</label>
+      <input type="file" name="listings[image]" required  class="form-control">
+      <div class="valid-feedback">Image looks Good</div>
+      <div class="invalid-feedback">This is invalid Image/Empty</div>
+    </div><br>
+
+    
+<div class="row">
+  <div class="col-md-4">
+    <label for="price" class="form-label">Enter Price</label>
+    <input type="number" name="listings[price]"  required class="form-control" placeholder="Enter Price">
+    <div class="valid-feedback">Price  looks Good</div>
+      <div class="invalid-feedback">write price in numbers/valid</div>
+  </div><br>
+   <div class="col-md-8">
+    <label for="location" class="form-label">Location</label>
+     <input type="text" name="listings[location]" required  class="form-control" placeholder="Enter location name">
+    <div class="valid-feedback">Location looks Good</div>
+      <div class="invalid-feedback">Give us your right location</div>
+    </div><br>
+<div>
+</div>
+   <label for="country" class="form-label">Country name</label>
+      <input type="text" name="listings[country]" required  class="form-control" placeholder="Enter country here">
+<div class="valid-feedback"> Country location looks Good</div>
+      <div class="invalid-feedback">Location is not valid</div>
+    </div>  <br>
+     <div>
+      <button type="submit" class="btn btn-dark">Submit</button>
+     </div> <br>
+  </form>
+  </div>
+  <script>
+(() => {
+    'use strict'
+
+    const forms = document.querySelectorAll('.needs-validation')
+
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+
+        }, false)
+    })
+})()
+</script>
+</body>
+
